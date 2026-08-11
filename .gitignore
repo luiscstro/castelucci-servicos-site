@@ -1,0 +1,11 @@
+# Raw source material (brand kit, portfolio PDF/PPT) — kept local only, not versioned.
+material_Castelucci/
+portfolio/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Local scratch
+*.tmp
