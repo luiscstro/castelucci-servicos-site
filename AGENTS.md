@@ -94,8 +94,12 @@ imagens, reveal suave ao rolar, sem "pulo" de layout.
 ## Notas específicas deste projeto
 
 - Site estático (HTML/CSS/JS puro, sem build). Testar localmente com
-  `python -m http.server` a partir da raiz do repo. Deploy é feito por upload/FTP para
-  Hostinger após o merge do PR na `main` (sem CI/CD automático configurado até o momento).
+  `python -m http.server` a partir da raiz do repo (ou `preview.bat` no Windows). **Nunca**
+  abrir os arquivos direto via duplo-clique/`file://` — as URLs limpas (`/sobre/` em vez de
+  `/sobre/index.html`) só resolvem servidas por HTTP; via `file://` o navegador lista o
+  conteúdo da pasta em vez de carregar a página, e os links de navegação parecem "quebrados".
+  Deploy é feito por upload/FTP para Hostinger após o merge do PR na `main` (sem CI/CD
+  automático configurado até o momento).
 - Paleta, tipografia e componentes seguem os tokens definidos em `assets/css/style.css`
   (seção 1 — Design tokens), derivados da identidade visual da Castelucci
   (`material_Castelucci/`, pasta local, não versionada — ver `.gitignore`). Não reintroduzir
