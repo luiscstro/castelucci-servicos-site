@@ -222,6 +222,53 @@
     window.addEventListener("resize", onScrollTl, { passive: true });
   })();
 
+  /* ---------- Hero cube: pointer-follow 3D tilt (desktop pointers only) ----------
+     Gated to hover+fine-pointer devices so touch/mobile never pays for this: no
+     listeners are attached at all there, keeping the hero fluid on phones. */
+  (function initCubeTilt() {
+    var stage = document.querySelector(".cube-stage");
+    var wrap = document.getElementById("cube-mark-wrap");
+    if (!stage || !wrap || prefersReducedMotion) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+    var maxTilt = 15;
+    var bounds = stage.getBoundingClientRect();
+    var ticking = false;
+    var pending = null;
+
+    function updateBounds() {
+      bounds = stage.getBoundingClientRect();
+    }
+
+    function apply() {
+      ticking = false;
+      if (!pending) return;
+      var relX = Math.min(Math.max((pending.x - bounds.left) / bounds.width, 0), 1);
+      var relY = Math.min(Math.max((pending.y - bounds.top) / bounds.height, 0), 1);
+      var rotY = (relX - 0.5) * maxTilt * 2;
+      var rotX = (0.5 - relY) * maxTilt * 2;
+      wrap.style.transform =
+        "perspective(1200px) rotateX(" + rotX.toFixed(2) + "deg) rotateY(" + rotY.toFixed(2) + "deg) scale(1.04)";
+    }
+
+    function onMove(e) {
+      pending = { x: e.clientX, y: e.clientY };
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(apply);
+      }
+    }
+
+    function reset() {
+      wrap.style.transform = "";
+    }
+
+    stage.addEventListener("mouseenter", updateBounds);
+    stage.addEventListener("mousemove", onMove);
+    stage.addEventListener("mouseleave", reset);
+    window.addEventListener("resize", updateBounds, { passive: true });
+  })();
+
   /* ---------- Floating WhatsApp widget ---------- */
   var floatingWidget = document.getElementById("floating-widget");
   var floatingToggle = document.getElementById("floating-toggle");
