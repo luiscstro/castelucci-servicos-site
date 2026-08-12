@@ -457,21 +457,21 @@ table.clients tbody tr:last-child td { border-bottom: none; }
 .pillar { display: flex; gap: var(--space-3); align-items: flex-start; }
 .pillar .num { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--slate-300); line-height: 1; }
 
-/* Equipe gallery: masonry-style columns, each photo fades in (opacity only,
-   no scale/blur) once it's scrolled into view and finished loading. Plain
-   CSS grid, no sticky/scroll-jacking. Skeleton shimmer reuses the same
-   @keyframes shimmer as .skel until each shot is ready; see
-   initEquipeGallery in main.js. */
+/* Equipe gallery: uniform grid (every tile the same 1:1 aspect ratio, so
+   columns/rows line up cleanly instead of a ragged masonry). Each photo
+   fades in (opacity only) once it's scrolled into view and finished
+   loading. Skeleton shimmer reuses the same @keyframes shimmer as .skel
+   until each shot is ready; see initEquipeGallery in main.js. */
 .equipe-gallery {
   display: grid; grid-template-columns: 1fr; gap: var(--space-4);
   margin-top: var(--space-6);
 }
 @media (min-width: 640px) { .equipe-gallery { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1024px) { .equipe-gallery { grid-template-columns: 1fr 1fr 1fr; } }
-.equipe-col { display: flex; flex-direction: column; gap: var(--space-4); }
 .equipe-shot {
   position: relative; overflow: hidden; border-radius: var(--radius-lg);
   background: var(--slate-100); box-shadow: var(--shadow-sm);
+  aspect-ratio: 1 / 1;
 }
 .equipe-shot::before {
   content: ""; position: absolute; inset: 0;
