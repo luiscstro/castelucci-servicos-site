@@ -17,5 +17,5 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
 
-# Página de erro 404 customizada (criar futuramente em /404.html)
-# ErrorDocument 404 /404.html
+# Página de erro 404 customizada
+ErrorDocument 404 /404.html

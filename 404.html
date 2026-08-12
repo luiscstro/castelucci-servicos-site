@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Página não encontrada — Castelucci Serviços</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="assets/img/brand/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="load-progress"></div>
+<a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+<header class="site-header" id="site-header">
+  <div class="container nav">
+    <a href="./" class="nav-brand">
+      <img src="assets/img/brand/logo-lockup-horizontal.png" alt="Castelucci Serviços" style="height:34px;width:auto;">
+    </a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="./">Início</a>
+      <a href="sobre/">Sobre</a>
+      <a href="servicos/">Serviços</a>
+      <a href="setor-publico/">Setor Público</a>
+      <a href="contato/">Contato</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="contato/" class="btn btn-primary nav-cta">Fale Conosco</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim"></div>
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mobile-drawer-head">
+    <img src="assets/img/brand/icon-mark-white.png" alt="" style="height:34px;">
+    <button class="mobile-drawer-close" id="drawer-close" aria-label="Fechar menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="./">Início</a>
+    <a href="sobre/">Sobre</a>
+    <a href="servicos/">Serviços</a>
+    <a href="setor-publico/">Setor Público</a>
+    <a href="contato/">Contato</a>
+  </nav>
+  <div class="mobile-drawer-footer">
+    <a href="contato/" class="btn btn-primary btn-block">Fale Conosco</a>
+  </div>
+</div>
+
+<main id="main">
+  <section class="section" style="min-height:60vh;display:flex;align-items:center;">
+    <div class="container" style="text-align:center;max-width:600px;" data-reveal>
+      <span class="eyebrow" style="justify-content:center;">Erro 404</span>
+      <h1>Essa página não existe (mais)</h1>
+      <p style="margin:0 auto var(--space-5);">O link pode estar desatualizado ou a página pode ter mudado de endereço. Volte para o início ou vá direto para uma das seções abaixo.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="./" class="btn btn-primary">Voltar ao início</a>
+        <a href="servicos/" class="btn btn-ghost">Ver serviços</a>
+        <a href="contato/" class="btn btn-ghost">Falar com a gente</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-bottom" style="border-top:none;margin-top:0;padding-top:var(--space-4);">
+    <span>© <span id="year"></span> Castelucci Serviços. Todos os direitos reservados.</span>
+    <a href="politica-de-privacidade/">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
