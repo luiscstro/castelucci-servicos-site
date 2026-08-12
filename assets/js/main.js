@@ -269,44 +269,43 @@
     window.addEventListener("resize", updateBounds, { passive: true });
   })();
 
-  /* ---------- Equipe stack: sticky scroll-scaled photo cards ----------
-     Baseline markup/CSS is a plain static grid (works with no JS at all).
-     Only upgraded to the sticky stacking effect when motion is allowed —
-     under reduced-motion this simply never runs and the grid stays put. */
-  (function initEquipeStack() {
-    var stack = document.getElementById("equipe-stack");
-    if (!stack || prefersReducedMotion) return;
+  /* ---------- Equipe gallery: fade each photo in once it's in view + loaded ---------- */
+  (function initEquipeGallery() {
+    var shots = Array.prototype.slice.call(document.querySelectorAll(".equipe-shot"));
+    if (!shots.length) return;
 
-    var cards = Array.prototype.slice.call(stack.querySelectorAll(".equipe-card-inner"));
-    var count = cards.length;
-    if (!count) return;
-
-    stack.classList.add("is-stacked");
-
-    var ticking = false;
-    function update() {
-      ticking = false;
-      var rect = stack.getBoundingClientRect();
-      var total = rect.height - window.innerHeight;
-      var progress = total > 0 ? Math.min(Math.max(-rect.top / total, 0), 1) : 0;
-
-      cards.forEach(function (card, i) {
-        var start = i / count;
-        var t = Math.min(Math.max((progress - start) / (1 - start), 0), 1);
-        var targetScale = Math.max(0.62, 1 - (count - i - 1) * 0.08);
-        var scale = 1 - t * (1 - targetScale);
-        card.style.transform = "scale(" + scale.toFixed(3) + ")";
-      });
-    }
-    function onScroll() {
-      if (!ticking) {
-        ticking = true;
-        window.requestAnimationFrame(update);
+    function reveal(shot) {
+      var img = shot.querySelector("img");
+      if (!img) return;
+      function show() {
+        shot.classList.add("is-visible");
+      }
+      if (img.complete && img.naturalWidth > 0) {
+        show();
+      } else {
+        img.addEventListener("load", show);
+        img.addEventListener("error", show);
       }
     }
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
+
+    if ("IntersectionObserver" in window && !prefersReducedMotion) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              reveal(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
+      );
+      shots.forEach(function (shot) {
+        observer.observe(shot);
+      });
+    } else {
+      shots.forEach(reveal);
+    }
   })();
 
   /* ---------- Floating WhatsApp widget ---------- */
