@@ -457,42 +457,34 @@ table.clients tbody tr:last-child td { border-bottom: none; }
 .pillar { display: flex; gap: var(--space-3); align-items: flex-start; }
 .pillar .num { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--slate-300); line-height: 1; }
 
-/* Equipe stack: baseline is a plain responsive grid (works everywhere, no JS
-   needed). JS upgrades it to a sticky, scroll-scaled stack of cards on
-   capable browsers when the user hasn't asked for reduced motion; see
-   initEquipeStack in main.js. Never the only way to reach the content. */
-.equipe-stack {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-4); padding: var(--space-5) var(--space-4) var(--space-7);
-  max-width: var(--container); margin: 0 auto;
+/* Equipe gallery: masonry-style columns, each photo fades in (opacity only,
+   no scale/blur) once it's scrolled into view and finished loading. Plain
+   CSS grid, no sticky/scroll-jacking. Skeleton shimmer reuses the same
+   @keyframes shimmer as .skel until each shot is ready; see
+   initEquipeGallery in main.js. */
+.equipe-gallery {
+  display: grid; grid-template-columns: 1fr; gap: var(--space-4);
+  margin-top: var(--space-6);
 }
-.equipe-card { position: static; }
-.equipe-card-inner {
-  position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+@media (min-width: 640px) { .equipe-gallery { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .equipe-gallery { grid-template-columns: 1fr 1fr 1fr; } }
+.equipe-col { display: flex; flex-direction: column; gap: var(--space-4); }
+.equipe-shot {
+  position: relative; overflow: hidden; border-radius: var(--radius-lg);
+  background: var(--slate-100); box-shadow: var(--shadow-sm);
 }
-.equipe-card-label {
-  position: absolute; left: 16px; bottom: 16px; z-index: 2;
-  color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem;
-  background: rgba(7,22,38,0.55); padding: 7px 16px; border-radius: 999px;
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+.equipe-shot::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.75) 50%, transparent 70%);
+  transform: translateX(-100%); animation: shimmer 1500ms ease-in-out infinite;
+  transition: opacity var(--dur-base) linear;
 }
-
-.equipe-stack.is-stacked {
-  display: block; padding: 6vh var(--space-4) 55vh; max-width: none;
+.equipe-shot.is-visible::before { opacity: 0; }
+.equipe-shot img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  opacity: 0; transition: opacity 900ms ease-in-out;
 }
-.equipe-stack.is-stacked .equipe-card {
-  position: sticky; top: calc(9vh + var(--i) * 16px);
-  display: flex; justify-content: center; z-index: calc(var(--i) + 1);
-}
-.equipe-stack.is-stacked .equipe-card-inner {
-  width: min(560px, 88vw); aspect-ratio: 16 / 10;
-  transform-origin: top center; will-change: transform;
-}
-
-/* Client/órgão logo marquee: full-bleed, auto-scrolling, pauses on hover.
-   Edge fade via mask so logos scroll into/out of view instead of clipping. */
-.logos-marquee {
+.equipe-shot.is-visible img { opacity: 1; }
 
 /* Client/órgão logo marquee: full-bleed, auto-scrolling, pauses on hover.
    Edge fade via mask so logos scroll into/out of view instead of clipping. */
