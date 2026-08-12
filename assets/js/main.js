@@ -269,12 +269,17 @@
     window.addEventListener("resize", updateBounds, { passive: true });
   })();
 
-  /* ---------- Equipe gallery: fade each photo in once it's in view + loaded ---------- */
+  /* ---------- Equipe gallery: fade each photo in once it's in view + loaded ----------
+     Belt-and-suspenders: an IntersectionObserver drives the intended progressive
+     reveal, but every shot also gets a hard timeout fallback so a photo can never
+     get stuck on the skeleton forever if the observer doesn't fire for some reason
+     (odd viewport/layout timing, older browser, etc.). */
   (function initEquipeGallery() {
     var shots = Array.prototype.slice.call(document.querySelectorAll(".equipe-shot"));
     if (!shots.length) return;
 
     function reveal(shot) {
+      if (shot.classList.contains("is-visible")) return;
       var img = shot.querySelector("img");
       if (!img) return;
       function show() {
@@ -288,6 +293,12 @@
       }
     }
 
+    shots.forEach(function (shot, i) {
+      setTimeout(function () {
+        reveal(shot);
+      }, 1200 + i * 80);
+    });
+
     if ("IntersectionObserver" in window && !prefersReducedMotion) {
       var observer = new IntersectionObserver(
         function (entries) {
@@ -298,7 +309,7 @@
             }
           });
         },
-        { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
+        { threshold: 0.01, rootMargin: "0px 0px 200px 0px" }
       );
       shots.forEach(function (shot) {
         observer.observe(shot);
