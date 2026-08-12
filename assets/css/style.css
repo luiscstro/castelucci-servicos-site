@@ -599,7 +599,7 @@ table.clients tbody tr:last-child td { border-bottom: none; }
 .tag { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; background: var(--bg-tint); color: var(--navy-800); font-size: 0.78rem; font-weight: 600; }
 .divider { height: 1px; background: var(--border); border: none; margin: var(--space-6) 0; }
 .back-to-top {
-  position: fixed; right: 22px; bottom: 96px; width: 44px; height: 44px; border-radius: 50%;
+  position: fixed; left: 22px; bottom: 22px; width: 44px; height: 44px; border-radius: 50%;
   background: var(--navy-900); color: #fff; border: none; display: flex; align-items: center; justify-content: center;
   cursor: pointer; z-index: 700; box-shadow: var(--shadow-md);
   opacity: 0; transform: translateY(12px); pointer-events: none;
