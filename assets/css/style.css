@@ -164,7 +164,7 @@ section { position: relative; }
   padding: 14px var(--space-4);
 }
 .nav-brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; color: var(--navy-900); font-size: 1.05rem; }
-.nav-brand img { height: 46px; width: auto; }
+.nav-brand img { height: 54px; width: auto; }
 .nav-links { display: flex; align-items: center; gap: var(--space-4); }
 .nav-links a {
   font-weight: 500; font-size: 0.95rem; color: var(--text-secondary);
@@ -374,6 +374,17 @@ section { position: relative; }
 .media .skel { position: absolute; inset: 0; transition: opacity var(--dur-base) linear; }
 .media.is-loaded .skel { opacity: 0; pointer-events: none; }
 
+/* Duotone treatment: unifies photos of very different source quality/lighting
+   (several team photos are small low-res crops) into one deliberate navy
+   photographic style, instead of looking like a mismatched, pixelated grid. */
+.media.duo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(150deg, rgba(7,22,38,0.8), rgba(18,63,104,0.3));
+  mix-blend-mode: multiply;
+}
+.media.duo img { filter: blur(10px) grayscale(1) contrast(1.08) brightness(1.15); }
+.media.duo.is-loaded img { filter: blur(0) grayscale(1) contrast(1.08) brightness(1.15); }
+
 /* Stat counters — number "counts up" once revealed, communicates real progress */
 .stat-number { font-variant-numeric: tabular-nums; }
 
@@ -464,7 +475,7 @@ table.clients tbody tr:last-child td { border-bottom: none; }
   transition: transform var(--dur-base) var(--ease-standard);
 }
 .footer-logo-plate:hover { transform: translateY(-2px); }
-.footer-logo-plate img { height: 36px; width: auto; display: block; }
+.footer-logo-plate img { height: 42px; width: auto; display: block; }
 .footer-brand p { color: rgba(255,255,255,0.6); font-size: 0.92rem; }
 .footer-col h4 { color: #fff; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-3); }
 .footer-col a, .footer-col li { display: block; color: rgba(255,255,255,0.68); font-size: 0.92rem; margin-bottom: 10px; transition: color var(--dur-fast) linear, transform var(--dur-fast) var(--ease-standard); }
