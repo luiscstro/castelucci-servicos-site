@@ -377,17 +377,6 @@ section { position: relative; }
 .media .skel { position: absolute; inset: 0; transition: opacity var(--dur-base) linear; }
 .media.is-loaded .skel { opacity: 0; pointer-events: none; }
 
-/* Duotone treatment: unifies photos of very different source quality/lighting
-   (several team photos are small low-res crops) into one deliberate navy
-   photographic style, instead of looking like a mismatched, pixelated grid. */
-.media.duo::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(150deg, rgba(7,22,38,0.8), rgba(18,63,104,0.3));
-  mix-blend-mode: multiply;
-}
-.media.duo img { filter: blur(10px) grayscale(1) contrast(1.08) brightness(1.15); }
-.media.duo.is-loaded img { filter: blur(0) grayscale(1) contrast(1.08) brightness(1.15); }
-
 /* Stat counters — number "counts up" once revealed, communicates real progress */
 .stat-number { font-variant-numeric: tabular-nums; }
 
@@ -467,6 +456,43 @@ table.clients tbody tr:last-child td { border-bottom: none; }
 /* Testimonial / compromisso cards */
 .pillar { display: flex; gap: var(--space-3); align-items: flex-start; }
 .pillar .num { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--slate-300); line-height: 1; }
+
+/* Equipe stack: baseline is a plain responsive grid (works everywhere, no JS
+   needed). JS upgrades it to a sticky, scroll-scaled stack of cards on
+   capable browsers when the user hasn't asked for reduced motion; see
+   initEquipeStack in main.js. Never the only way to reach the content. */
+.equipe-stack {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4); padding: var(--space-5) var(--space-4) var(--space-7);
+  max-width: var(--container); margin: 0 auto;
+}
+.equipe-card { position: static; }
+.equipe-card-inner {
+  position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.equipe-card-label {
+  position: absolute; left: 16px; bottom: 16px; z-index: 2;
+  color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem;
+  background: rgba(7,22,38,0.55); padding: 7px 16px; border-radius: 999px;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+
+.equipe-stack.is-stacked {
+  display: block; padding: 6vh var(--space-4) 55vh; max-width: none;
+}
+.equipe-stack.is-stacked .equipe-card {
+  position: sticky; top: calc(9vh + var(--i) * 16px);
+  display: flex; justify-content: center; z-index: calc(var(--i) + 1);
+}
+.equipe-stack.is-stacked .equipe-card-inner {
+  width: min(560px, 88vw); aspect-ratio: 16 / 10;
+  transform-origin: top center; will-change: transform;
+}
+
+/* Client/órgão logo marquee: full-bleed, auto-scrolling, pauses on hover.
+   Edge fade via mask so logos scroll into/out of view instead of clipping. */
+.logos-marquee {
 
 /* Client/órgão logo marquee: full-bleed, auto-scrolling, pauses on hover.
    Edge fade via mask so logos scroll into/out of view instead of clipping. */
