@@ -100,12 +100,11 @@ p { margin: 0 0 var(--space-3); color: var(--text-secondary); max-width: 62ch; }
 .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--space-4); }
 section { position: relative; }
 .eyebrow {
-  display: inline-flex; align-items: center; gap: var(--space-2);
+  display: inline-flex; align-items: center;
   font-family: var(--font-display); font-weight: 600; font-size: 0.78rem;
   letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-accent);
   margin-bottom: var(--space-3);
 }
-.eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--blue-accent); border-radius: 2px; }
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
@@ -398,6 +397,8 @@ section { position: relative; }
 }
 .state-chip:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); }
 .state-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue-accent); }
+.coverage-map { display: flex; justify-content: center; }
+.coverage-map img { width: 100%; max-width: 420px; height: auto; }
 @media (max-width: 860px) { .coverage-wrap { grid-template-columns: 1fr; } }
 
 /* Client / órgão table */
