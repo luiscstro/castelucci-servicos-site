@@ -457,21 +457,22 @@ table.clients tbody tr:last-child td { border-bottom: none; }
 .pillar { display: flex; gap: var(--space-3); align-items: flex-start; }
 .pillar .num { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--slate-300); line-height: 1; }
 
-/* Equipe gallery: uniform grid (every tile the same 1:1 aspect ratio, so
-   columns/rows line up cleanly instead of a ragged masonry). Each photo
-   fades in (opacity only) once it's scrolled into view and finished
-   loading. Skeleton shimmer reuses the same @keyframes shimmer as .skel
-   until each shot is ready; see initEquipeGallery in main.js. */
+/* Equipe gallery: masonry-style columns (each photo keeps its own natural
+   aspect ratio — portrait/square/landscape — instead of being forced into a
+   uniform crop). Each photo fades in (opacity only) once it's scrolled into
+   view and finished loading. Skeleton shimmer reuses the same @keyframes
+   shimmer as .skel until each shot is ready; see initEquipeGallery in
+   main.js. */
 .equipe-gallery {
   display: grid; grid-template-columns: 1fr; gap: var(--space-4);
   margin-top: var(--space-6);
 }
 @media (min-width: 640px) { .equipe-gallery { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1024px) { .equipe-gallery { grid-template-columns: 1fr 1fr 1fr; } }
+.equipe-col { display: flex; flex-direction: column; gap: var(--space-4); }
 .equipe-shot {
   position: relative; overflow: hidden; border-radius: var(--radius-lg);
   background: var(--slate-100); box-shadow: var(--shadow-sm);
-  aspect-ratio: 1 / 1;
 }
 .equipe-shot::before {
   content: ""; position: absolute; inset: 0;
@@ -484,6 +485,15 @@ table.clients tbody tr:last-child td { border-bottom: none; }
   width: 100%; height: 100%; object-fit: cover; display: block;
   opacity: 0; transition: opacity 900ms ease-in-out;
 }
+.equipe-shot-label {
+  position: absolute; left: 16px; bottom: 16px; z-index: 2;
+  color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem;
+  background: rgba(7,22,38,0.55); padding: 7px 16px; border-radius: 999px;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  opacity: 0; transform: translateY(6px);
+  transition: opacity var(--dur-base) linear, transform var(--dur-base) var(--ease-standard);
+}
+.equipe-shot.is-visible .equipe-shot-label { opacity: 1; transform: translateY(0); }
 .equipe-shot.is-visible img { opacity: 1; }
 
 /* Client/órgão logo marquee: full-bleed, auto-scrolling, pauses on hover.
