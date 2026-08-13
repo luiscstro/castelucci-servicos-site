@@ -96,7 +96,12 @@
     if (e.key === "Escape") closeDrawer();
   });
 
-  /* ---------- Scroll reveal (single elements + staggered groups) ---------- */
+  /* ---------- Scroll reveal (single elements + staggered groups) ----------
+     Belt-and-suspenders: the IntersectionObserver drives the intended
+     scroll-triggered reveal, but every element also gets a generous fallback
+     timer so nothing can stay stuck invisible forever if the observer never
+     fires for it (resize/layout-timing edge cases, older browsers). The
+     timeout is long enough to never preempt a real scroll-triggered reveal. */
   var revealEls = Array.prototype.slice.call(document.querySelectorAll("[data-reveal], [data-reveal-group]"));
   if (revealEls.length) {
     if ("IntersectionObserver" in window && !prefersReducedMotion) {
@@ -113,6 +118,12 @@
       );
       revealEls.forEach(function (el) {
         revealObserver.observe(el);
+        setTimeout(function () {
+          if (!el.classList.contains("in-view")) {
+            el.classList.add("in-view");
+            revealObserver.unobserve(el);
+          }
+        }, 8000);
       });
     } else {
       revealEls.forEach(function (el) {
@@ -181,6 +192,42 @@
     } else {
       counters.forEach(animateCounter);
     }
+  })();
+
+  /* ---------- Client/órgão table: live filter by órgão or estado ---------- */
+  (function initClientFilter() {
+    var input = document.getElementById("client-filter");
+    var table = document.querySelector("table.clients");
+    if (!input || !table) return;
+    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody tr"));
+    var emptyMsg = document.getElementById("table-empty");
+    var countEl = document.getElementById("table-count");
+
+    var ACCENTS = { "á": "a", "à": "a", "ã": "a", "â": "a", "é": "e", "ê": "e", "í": "i", "ó": "o", "ô": "o", "õ": "o", "ú": "u", "ç": "c" };
+    function normalize(str) {
+      return str.toLowerCase().replace(/[à-ü]/g, function (ch) {
+        return ACCENTS[ch] || ch;
+      });
+    }
+
+    function applyFilter() {
+      var q = normalize(input.value.trim());
+      var visible = 0;
+      rows.forEach(function (row) {
+        var match = !q || normalize(row.textContent).indexOf(q) !== -1;
+        row.classList.toggle("is-filtered-out", !match);
+        if (match) visible++;
+      });
+      if (emptyMsg) emptyMsg.classList.toggle("show", visible === 0);
+      if (countEl) {
+        countEl.textContent = q
+          ? visible + " de " + rows.length + " órgãos/contratos"
+          : rows.length + " órgãos e contratos já atendidos";
+      }
+    }
+
+    input.addEventListener("input", applyFilter);
+    applyFilter();
   })();
 
   /* ---------- Timeline vertical animada pelo scroll ---------- */
