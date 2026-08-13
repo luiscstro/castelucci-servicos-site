@@ -79,36 +79,47 @@
 
 <section class="section" style="padding-top:0;">
   <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Nosso histórico</span>
+      <h2>Onde já atuamos</h2>
+      <p>Uma amostra dos órgãos e empresas atendidos pela Castelucci, com o tipo de posto mobilizado em cada contrato.</p>
+    </div>
+    <div class="table-filter">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="text" id="client-filter" placeholder="Buscar por órgão ou estado..." aria-label="Buscar por órgão ou estado">
+    </div>
+    <p class="table-count" id="table-count">22 órgãos e contratos já atendidos</p>
     <div class="table-wrap" data-reveal>
       <table class="clients">
         <thead>
           <tr><th>Órgão</th><th>Posto / Função</th><th>Estado</th></tr>
         </thead>
         <tbody>
-          <tr><td>Correios</td><td>Portaria</td><td>PI</td></tr>
-          <tr><td>Conab</td><td>Carga e descarga</td><td>MA</td></tr>
-          <tr><td>Cremepe</td><td>Portaria</td><td>PE</td></tr>
-          <tr><td>Dataprev</td><td>Recepção</td><td>RN</td></tr>
-          <tr><td>AGU</td><td>Administrativo</td><td>BA</td></tr>
-          <tr><td>Gasmar</td><td>Limpeza</td><td>MA</td></tr>
-          <tr><td>Procuradoria do MP</td><td>Editor de mídia</td><td>RN</td></tr>
-          <tr><td>Polícia Federal</td><td>Manutenção</td><td>MA</td></tr>
-          <tr><td>TRT PI</td><td>Estatístico</td><td>PI</td></tr>
-          <tr><td>UFMG</td><td>Limpeza</td><td>MG</td></tr>
-          <tr><td>PRF TO</td><td>Limpeza</td><td>TO</td></tr>
-          <tr><td>UFPB</td><td>Apoio administrativo</td><td>PB</td></tr>
-          <tr><td>TRT PI</td><td>Assistente de apoio administrativo</td><td>PI</td></tr>
-          <tr><td>Codevasf</td><td>Motorista e administrativo</td><td>MA</td></tr>
-          <tr><td>Ministério Público</td><td>Apoio administrativo</td><td>MA</td></tr>
-          <tr><td>PGE</td><td>Limpeza</td><td>MA</td></tr>
-          <tr><td>Coren-MA</td><td>Administrativo</td><td>MA</td></tr>
-          <tr><td>MAPA</td><td>Motorista</td><td>MA</td></tr>
-          <tr><td>Justiça Federal de Bacabal</td><td>Manutenção</td><td>MA</td></tr>
-          <tr><td>Justiça Federal de Imperatriz</td><td>Manutenção</td><td>MA</td></tr>
-          <tr><td>TRT Pará</td><td>Limpeza</td><td>PA</td></tr>
-          <tr><td>Receita Federal / Economia</td><td>Administrativo</td><td>MA</td></tr>
+          <tr><td data-label="Órgão">Correios</td><td data-label="Posto / Função">Portaria</td><td data-label="Estado"><span class="state-badge">PI</span></td></tr>
+          <tr><td data-label="Órgão">Conab</td><td data-label="Posto / Função">Carga e descarga</td><td data-label="Estado"><span class="state-badge">MA</span></td></tr>
+          <tr><td data-label="Órgão">Cremepe</td><td data-label="Posto / Função">Portaria</td><td data-label="Estado"><span class="state-badge">PE</span></td></tr>
+          <tr><td data-label="Órgão">Dataprev</td><td data-label="Posto / Função">Recepção</td><td data-label="Estado"><span class="state-badge">RN</span></td></tr>
+          <tr><td data-label="Órgão">AGU</td><td data-label="Posto / Função">Administrativo</td><td data-label="Estado"><span class="state-badge">BA</span></td></tr>
+          <tr><td data-label="Órgão">Gasmar</td><td data-label="Posto / Função">Limpeza</td><td data-label="Estado"><span class="state-badge">MA</span></td></tr>
+          <tr><td data-label="Órgão">Procuradoria do MP</td><td data-label="Posto / Função">Editor de mídia</td><td data-label="Estado"><span class="state-badge">RN</span></td></tr>
+          <tr><td data-label="Órgão">Polícia Federal</td><td data-label="Posto / Função">Manutenção</td><td data-label="Estado"><span class="state-badge">MA</span></td></tr>
+          <tr><td data-label="Órgão">TRT PI</td><td data-label="Posto / Função">Estatístico</td><td data-label="Estado"><span class="state-badge">PI</span></td></tr>
+          <tr><td data-label="Órgão">UFMG</td><td data-label="Posto / Função">Limpeza</td><td data-label="Estado"><span class="state-badge">MG</span></td></tr>
+          <tr><td data-label="Órgão">PRF TO</td><td data-label="Posto / Função">Limpeza</td><td data-label="Estado"><span class="state-badge">TO</span></td></tr>
+          <tr><td data-label="Órgão">UFPB</td><td data-label="Posto / Função">Apoio administrativo</td><td data-label="Estado"><span class="state-badge">PB</span></td></tr>
+          <tr><td data-label="Órgão">TRT PI</td><td data-label="Posto / Função">Assistente de apoio administrativo</td><td data-label="Estado"><span class="state-badge">PI</span></td></tr>
+          <tr><td data-label="Órgão">Codevasf</td><td data-label="Posto / Função">Motorista e administrativo</td><td data-label="Estado"><span class="state-badge">MA</span></td></tr>
+          <tr><td data-label="Órgão">Ministério Público</td><td data-label="Posto / Função">Apoio administrativo</td><td data-label="Estado"><span class="state-badge">MA</span></td></tr>
+          <tr><td data-label="Órgão">PGE</td><td data-label="Posto / Função">Limpeza</td><td data-label="Estado"><span class="state-badge">MA</span></td></tr>
+          <tr><td data-label="Órgão">Coren-MA</td><td data-label="Posto / Função">Administrativo</td><td data-label="Estado"><span class="state-badge">MA</span></td></tr>
+          <tr><td data-label="Órgão">MAPA</td><td data-label="Posto / Função">Motorista</td><td data-label="Estado"><span class="state-badge">MA</span></td></tr>
+          <tr><td data-label="Órgão">Justiça Federal de Bacabal</td><td data-label="Posto / Função">Manutenção</td><td data-label="Estado"><span class="state-badge">MA</span></td></tr>
+          <tr><td data-label="Órgão">Justiça Federal de Imperatriz</td><td data-label="Posto / Função">Manutenção</td><td data-label="Estado"><span class="state-badge">MA</span></td></tr>
+          <tr><td data-label="Órgão">TRT Pará</td><td data-label="Posto / Função">Limpeza</td><td data-label="Estado"><span class="state-badge">PA</span></td></tr>
+          <tr><td data-label="Órgão">Receita Federal / Economia</td><td data-label="Posto / Função">Administrativo</td><td data-label="Estado"><span class="state-badge">MA</span></td></tr>
         </tbody>
       </table>
+      <p class="table-empty" id="table-empty">Nenhum órgão encontrado para essa busca. Tente outro termo.</p>
     </div>
   </div>
 </section>
@@ -178,12 +189,15 @@
   </div>
 </section>
 
-<section class="section" style="text-align:center;">
-  <div class="container" data-reveal>
-    <span class="eyebrow" style="justify-content:center;">Próximo passo</span>
+<section class="section section-navy" style="padding:var(--space-7) 0;">
+  <div class="container" style="text-align:center;" data-reveal>
+    <span class="eyebrow" style="justify-content:center;color:#8fc1e8;">Próximo passo</span>
     <h2 style="max-width:560px;margin:0 auto var(--space-3);">Tem um edital em andamento?</h2>
     <p style="max-width:520px;margin:0 auto var(--space-5);">Envie o link do edital, o termo de referência ou apenas o resumo do objeto. Retornamos com prazo de proposta.</p>
-    <a href="../contato/" class="btn btn-primary">Enviar edital</a>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="../contato/" class="btn btn-accent">Enviar edital</a>
+      <a href="https://wa.me/5598988361292" target="_blank" rel="noopener" class="btn btn-ghost" style="border-color:rgba(255,255,255,0.25);color:#fff;">Falar no WhatsApp</a>
+    </div>
   </div>
 </section>
 
