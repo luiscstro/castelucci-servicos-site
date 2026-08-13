@@ -108,10 +108,8 @@ imagens, reveal suave ao rolar, sem "pulo" de layout.
 - Fotos reais de colaboradores (extraídas do portfólio comercial) ficam em
   `assets/img/equipe/`. Logos de clientes/órgãos atendidos ficam em `assets/img/clientes/` —
   só usar logo de cliente real confirmado no portfólio, nunca inventar cliente.
-- Dados de contato (`[TELEFONE]`, `[WHATSAPP]`, número do WhatsApp `55XXXXXXXXXXX` nos links
-  `wa.me/`) são placeholders — ver Issue "Adicionar dados de contato reais". Substituir em
-  todos os arquivos HTML (busca por `[TELEFONE]`, `[WHATSAPP]`, `55XXXXXXXXXXX`) antes do
-  primeiro deploy em produção.
+- Telefone/WhatsApp real: (98) 98836-1292 (`tel:+5598988361292`, `wa.me/5598988361292`), já
+  preenchido em todos os arquivos HTML e no JSON-LD da home.
 - Linguagem do site é português do Brasil; manter tom institucional/corporativo, focado em
   credibilidade para contratos públicos (licitação). Evitar linguagem que soe gerada por IA
   (travessões em excesso, frases genéricas de "diferenciais/valores" repetidas, adjetivos
