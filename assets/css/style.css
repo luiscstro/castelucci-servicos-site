@@ -289,9 +289,10 @@ section { position: relative; }
 @keyframes shadow-in { to { opacity: 1; } }
 .cube-orbit-ring {
   position: absolute; inset: -4%; border: 1px dashed rgba(26,107,171,0.22); border-radius: 50%;
-  opacity: 0; animation: ring-in 900ms var(--ease-enter) 480ms both;
+  opacity: 0; animation: ring-in 900ms var(--ease-enter) 480ms both, ring-spin 48s linear infinite;
 }
-@keyframes ring-in { to { opacity: 1; transform: rotate(8deg); } }
+@keyframes ring-in { to { opacity: 1; } }
+@keyframes ring-spin { to { transform: rotate(360deg); } }
 
 .cube-mark-wrap {
   position: absolute; inset: 12%; transform-style: preserve-3d;
@@ -308,6 +309,22 @@ section { position: relative; }
     opacity: 1; filter: blur(0) drop-shadow(0 22px 34px rgba(7,22,38,0.16));
     transform: perspective(1200px) rotateY(0deg) rotateX(0deg) translateZ(0) scale(1);
   }
+}
+
+/* Idle float: once it settles in, the cube keeps drifting gently in place
+   instead of going static — the "signature moment" stays alive at rest,
+   not just on hover. Lives on its own inner wrapper so it composes with
+   the pointer-tilt transform on .cube-mark-wrap (JS, desktop-only,
+   inline style) instead of fighting it on the same property/element. */
+.cube-mark-idle {
+  width: 100%; height: 100%; transform-style: preserve-3d;
+  animation: cube-idle-float 9s cubic-bezier(0.45, 0, 0.55, 1) 1000ms infinite;
+}
+@keyframes cube-idle-float {
+  0%   { transform: perspective(1200px) translateY(0)    rotateY(-6deg) rotateX(3deg); }
+  30%  { transform: perspective(1200px) translateY(-9px) rotateY(6deg)  rotateX(-2deg); }
+  60%  { transform: perspective(1200px) translateY(3px)  rotateY(9deg)  rotateX(3deg); }
+  100% { transform: perspective(1200px) translateY(0)    rotateY(-6deg) rotateX(3deg); }
 }
 
 .cube-chip {
@@ -681,7 +698,7 @@ table.clients tbody tr.is-filtered-out { display: none; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  [data-reveal], [data-reveal-group] > *, .cube-mark-wrap img, .cube-chip, .cube-stage::after, .cube-orbit-ring {
+  [data-reveal], [data-reveal-group] > *, .cube-mark-wrap img, .cube-mark-idle, .cube-chip, .cube-stage::after, .cube-orbit-ring {
     opacity: 1 !important; transform: none !important; filter: none !important;
   }
   .cube-chip { opacity: 0.9 !important; }
