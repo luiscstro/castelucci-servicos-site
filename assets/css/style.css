@@ -249,6 +249,24 @@ section { position: relative; }
 }
 .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: var(--space-7); align-items: center; }
 .hero-copy p.lead { font-size: 1.15rem; color: var(--text-secondary); max-width: 52ch; }
+
+/* Hero headline: two-tone emphasis (navy + brand blue) instead of a flat
+   single-color title, plus a quiet load-in so the text materializes with
+   the rest of the hero instead of just appearing static. Targets by
+   class/tag (not nth-child position) so it works whether the hero wraps
+   its text in .hero-copy (home, two-column) or not (every other page). */
+.hero h1 .text-accent { color: var(--blue-accent); }
+.hero .breadcrumb, .hero .eyebrow, .hero h1, .hero p.lead, .hero .hero-actions, .hero .hero-trust {
+  opacity: 0; transform: translateY(14px); filter: blur(4px);
+  animation: hero-copy-in var(--dur-reveal) var(--ease-enter) both;
+}
+.hero .breadcrumb { animation-delay: 0ms; }
+.hero .eyebrow { animation-delay: 60ms; }
+.hero h1 { animation-delay: 140ms; }
+.hero p.lead { animation-delay: 240ms; }
+.hero .hero-actions { animation-delay: 340ms; }
+.hero .hero-trust { animation-delay: 420ms; }
+@keyframes hero-copy-in { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
 .hero-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-4); }
 .hero-trust {
   display: flex; flex-wrap: wrap; margin-top: var(--space-6);
@@ -699,7 +717,8 @@ table.clients tbody tr.is-filtered-out { display: none; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  [data-reveal], [data-reveal-group] > *, .cube-mark-wrap img, .cube-mark-idle, .cube-chip, .cube-stage::after, .cube-orbit-ring {
+  [data-reveal], [data-reveal-group] > *, .cube-mark-wrap img, .cube-mark-idle, .cube-chip, .cube-stage::after, .cube-orbit-ring,
+  .hero .breadcrumb, .hero .eyebrow, .hero h1, .hero p.lead, .hero .hero-actions, .hero .hero-trust {
     opacity: 1 !important; transform: none !important; filter: none !important;
   }
   .cube-chip { opacity: 0.9 !important; }
