@@ -7,8 +7,6 @@
 <meta name="description" content="Fale com a Castelucci Serviços para solicitar proposta de terceirização de mão de obra, falar sobre um contrato público ou tirar dúvidas.">
 <link rel="icon" type="image/png" href="../assets/img/brand/favicon-32.png">
 <link rel="apple-touch-icon" href="../assets/img/brand/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="../assets/css/style.css">
 <meta property="og:title" content="Castelucci Serviços">
 <meta property="og:description" content="Solicite uma proposta de terceirização de mão de obra ou fale sobre o contrato do seu órgão.">
@@ -148,9 +146,14 @@
         <p style="margin-bottom:4px;">Prédio Mocelin Tower, Vila Vicente Fialho</p>
         <p class="hint" style="margin:0;">São Luís, MA, CEP 65073-212. Atendimento em MA, PA, PI, TO, RN, PB, PE, MG e BA.</p>
       </div>
-      <div class="media" style="aspect-ratio:16/10;">
+      <div class="media" id="map-media" style="aspect-ratio:16/10;">
         <div class="skel"></div>
-        <iframe title="Mapa da sede da Castelucci Serviços, em São Luís, Maranhão" src="https://maps.google.com/maps?q=Av.+Daniel+de+La+Touche%2C+20+-+Vila+Vicente+Fialho%2C+Sao+Luis+-+MA%2C+65073-212&output=embed" style="width:100%;height:100%;border:0;position:relative;z-index:1;" loading="lazy" onload="this.closest('.media').classList.add('is-loaded')"></iframe>
+        <div class="map-consent" id="map-consent">
+          <p>O mapa é carregado do Google Maps e envia dados de navegação a um servidor do Google. Carregamos só com o seu consentimento.</p>
+          <button type="button" class="btn btn-ghost" id="map-consent-load">Carregar mapa</button>
+          <a class="map-consent-link" href="https://www.google.com/maps/search/?api=1&query=Av.+Daniel+de+La+Touche%2C+20+-+Vila+Vicente+Fialho%2C+Sao+Luis+-+MA%2C+65073-212" target="_blank" rel="noopener">Abrir endereço no Google Maps</a>
+        </div>
+        <iframe title="Mapa da sede da Castelucci Serviços, em São Luís, Maranhão" id="map-iframe" data-src="https://maps.google.com/maps?q=Av.+Daniel+de+La+Touche%2C+20+-+Vila+Vicente+Fialho%2C+Sao+Luis+-+MA%2C+65073-212&output=embed" style="width:100%;height:100%;border:0;position:relative;z-index:1;" loading="lazy" onload="this.closest('.media').classList.add('is-loaded')"></iframe>
       </div>
     </div>
   </div>

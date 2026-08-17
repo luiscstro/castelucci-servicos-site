@@ -4,7 +4,23 @@
   Secondary = Jhey Tompkins (one signature moment — the cube mark), Selective = Emil
   Kowalski (nav, forms, buttons: fast, restrained, no bounce). See AGENTS.md.
 */
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+/* Fontes auto-hospedadas (Lexend e Source Sans 3, SIL Open Font License) — evita
+   requisição ao Google em toda visita, que enviaria o IP do visitante a um terceiro
+   antes de qualquer consentimento. Ver politica-de-privacidade/. */
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('../fonts/lexend-latin-var.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/source-sans-3-latin-var.woff2') format('woff2');
+}
 
 /* ============================= 1. Design tokens ============================= */
 :root {
@@ -412,6 +428,18 @@ section { position: relative; }
 .media.is-loaded img { opacity: 1; filter: blur(0); transform: scale(1); }
 .media .skel { position: absolute; inset: 0; transition: opacity var(--dur-base) linear; }
 .media.is-loaded .skel { opacity: 0; pointer-events: none; }
+
+.map-consent {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--space-2); text-align: center; padding: var(--space-4);
+  background: var(--slate-100);
+  transition: opacity var(--dur-base) var(--ease-standard);
+}
+.map-consent p { max-width: 320px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0; }
+.map-consent .btn { padding: 8px 16px; font-size: 0.85rem; }
+.map-consent-link { font-size: 0.8rem; text-decoration: underline; color: var(--text-secondary); }
+.media.map-loaded .map-consent { opacity: 0; pointer-events: none; }
 
 .video-feature { display: grid; grid-template-columns: 1fr; gap: var(--space-5); align-items: center; }
 @media (min-width: 860px) { .video-feature { grid-template-columns: 300px 1fr; } }
