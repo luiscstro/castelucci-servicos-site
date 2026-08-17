@@ -5,6 +5,7 @@
   window.__castelucciMainInit = true;
 
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var COOKIE_KEY = "castelucci_lgpd_consent";
 
   /* ---------- Top load progress bar ---------- */
   (function progressBar() {
@@ -399,7 +400,6 @@
   );
 
   /* ---------- Cookie / LGPD consent banner ---------- */
-  var COOKIE_KEY = "castelucci_lgpd_consent";
   var cookieBanner = document.getElementById("cookie-banner");
   if (cookieBanner) {
     try {
@@ -413,13 +413,49 @@
     }
     cookieBanner.querySelectorAll("[data-consent]").forEach(function (btn) {
       btn.addEventListener("click", function () {
+        var consent = btn.getAttribute("data-consent");
         try {
-          localStorage.setItem(COOKIE_KEY, btn.getAttribute("data-consent"));
+          localStorage.setItem(COOKIE_KEY, consent);
         } catch (err) {}
         cookieBanner.classList.remove("show");
+        if (consent === "accepted") {
+          document.dispatchEvent(new CustomEvent("castelucci:consent-accepted"));
+        }
       });
     });
   }
+
+  /* ---------- Google Maps embed: só carrega com consentimento ----------
+     O iframe fica sem "src" até o visitante clicar em "Carregar mapa" ou já ter
+     escolhido "Aceitar" no banner de cookies (nesta visita ou numa anterior) — só
+     então a requisição ao Google (que expõe o IP do visitante a um terceiro)
+     acontece. Ver politica-de-privacidade/. */
+  (function initMapConsent() {
+    var media = document.getElementById("map-media");
+    var iframe = document.getElementById("map-iframe");
+    var consentBox = document.getElementById("map-consent");
+    var loadBtn = document.getElementById("map-consent-load");
+    if (!media || !iframe || !consentBox) return;
+
+    function loadMap() {
+      if (iframe.getAttribute("src")) return;
+      var src = iframe.getAttribute("data-src");
+      if (!src) return;
+      iframe.setAttribute("src", src);
+      media.classList.add("map-loaded");
+    }
+
+    var consent;
+    try {
+      consent = localStorage.getItem(COOKIE_KEY);
+    } catch (err) {
+      consent = null;
+    }
+    if (consent === "accepted") loadMap();
+
+    loadBtn && loadBtn.addEventListener("click", loadMap);
+    document.addEventListener("castelucci:consent-accepted", loadMap);
+  })();
 
   /* ---------- Contact form validation + submit feedback ---------- */
   var form = document.getElementById("contact-form");
