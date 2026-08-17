@@ -221,8 +221,8 @@
       if (emptyMsg) emptyMsg.classList.toggle("show", visible === 0);
       if (countEl) {
         countEl.textContent = q
-          ? visible + " de " + rows.length + " órgãos/contratos"
-          : rows.length + " órgãos e contratos já atendidos";
+          ? visible + (visible === 1 ? " resultado encontrado" : " resultados encontrados")
+          : "Alguns dos nossos contratos";
       }
     }
 
