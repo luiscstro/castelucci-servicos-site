@@ -7,7 +7,6 @@
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var COOKIE_KEY = "castelucci_lgpd_consent";
 
-  /* ---------- Top load progress bar ---------- */
   (function progressBar() {
     var bar = document.getElementById("load-progress");
     if (!bar) return;
